@@ -1,0 +1,17 @@
+{
+  "name": "dazzle",
+  "owner": {
+    "name": "Dazzle"
+  },
+  "metadata": {
+    "description": "Dazzle — an AI agent that deeply understands you through your photos."
+  },
+  "plugins": [
+    {
+      "name": "dazzle-photo-intelligence",
+      "source": "./plugins/dazzle-photo-intelligence",
+      "description": "An AI agent that deeply understands you through your photos. Through a companion iOS app, Dazzle learns who you are — where you live, your preferences, the people in your life, the places you've been, and other personal choices.",
+      "category": "productivity"
+    }
+  ]
+}

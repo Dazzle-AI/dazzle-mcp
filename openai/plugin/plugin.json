@@ -1,0 +1,105 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "dazzle-photo-intelligence",
+  "version": "1.0.0",
+  "description": "Dazzle Photo Intelligence answers questions about your own life from the photos you share with the Dazzle iPhone app: your pets, family and friends, home, trips, hobbies, and tastes. Ask in plain language and get a written answer, or see the matching photos in a gallery.",
+  "author": {
+    "name": "Dazzle AI, Inc.",
+    "email": "support@dazzle.ai",
+    "url": "https://dazzle.ai"
+  },
+  "homepage": "https://dazzle.ai",
+  "keywords": ["photos", "memories", "personal assistant", "photo gallery", "recommendations"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Dazzle Photo Intelligence",
+        "shortDescription": "Ask about your life in photos",
+        "longDescription": "Dazzle Photo Intelligence turns your photo library into answers about your own life.\n\nThe Dazzle iPhone app learns from the photos you choose to share: the pets you love, the people you spend time with, your home, the places you have traveled, your hobbies, and your everyday tastes. Connect Dazzle Photo Intelligence to ChatGPT and ask about any of it in plain language.\n\nAsk a question and get a written answer you can build on, like \"What pets do I have?\" or \"When did I last visit Paris?\". Ask to see something and Dazzle shows the matching photos in a gallery, with where and when each one was taken, like \"Show me my dog\" or \"What does my backyard look like?\". Because Dazzle knows your real history, it can also ground personal questions such as \"What gift would my dad like?\" or \"Where should we eat tonight?\" in what you actually enjoy.\n\nDazzle only reads the photos and profile of the account you sign in with. Access is read-only: Dazzle cannot edit, upload, share, or delete photos, and you can disconnect it at any time.\n\nRequires a Dazzle account and the Dazzle iPhone app with photos shared.",
+        "developerName": "Dazzle AI, Inc.",
+        "category": "Productivity",
+        "capabilities": [
+          "Answer questions about your life from your photos",
+          "Show matching photos in a gallery",
+          "Recall pets, family, friends, and home",
+          "Find trips and places you have visited",
+          "Ground recommendations and gift ideas in your real interests",
+          "Read-only access to your own Dazzle library"
+        ],
+        "websiteURL": "https://dazzle.ai",
+        "supportURL": "https://dazzle.ai/support/",
+        "privacyPolicyURL": "https://dazzle.ai/privacy-policy/",
+        "termsOfServiceURL": "https://dazzle.ai/terms-of-service/",
+        "defaultPrompt": [
+          "What pets do I have?",
+          "Show me photos from my last trip",
+          "What gift would my dad like?"
+        ],
+        "brandColor": "#FF7C00",
+        "brandColorDark": "#FF7C00",
+        "composerIcon": "./assets/icon.png",
+        "composerIconDark": "./assets/icon.png",
+        "logo": "./assets/icon.png",
+        "logoDark": "./assets/icon.png"
+      },
+      "onboardingSkill": "./skills/dazzle-photo-intelligence/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Answer a factual question about the user's pets in text",
+              "prompt": "Using Dazzle Photo Intelligence, what pets do I have?",
+              "tools_triggered": "dazzle_ask",
+              "expected_behavior": "Calls dazzle_ask once and answers in text that the test account has a dog, a golden retriever named Biscuit, based on the account's photos. No photo gallery is shown."
+            },
+            {
+              "description": "Show photos of the user's pet in the gallery",
+              "prompt": "Show me photos of my dog from Dazzle Photo Intelligence.",
+              "tools_triggered": "dazzle_photos",
+              "expected_behavior": "Calls dazzle_photos and displays a gallery of up to 3 photos of the test account's dog, each captioned with where and when it was taken. The reply adds at most one short framing line and does not re-list the photos."
+            },
+            {
+              "description": "Show photos of a place in the user's life",
+              "prompt": "With Dazzle Photo Intelligence, show me what my backyard looks like.",
+              "tools_triggered": "dazzle_photos",
+              "expected_behavior": "Calls dazzle_photos and displays a gallery of photos of the test account's backyard garden. The reply adds at most one short framing line."
+            },
+            {
+              "description": "Recall a past trip from the user's photos",
+              "prompt": "Using Dazzle Photo Intelligence, when did I go to Tokyo and what did I do there?",
+              "tools_triggered": "dazzle_ask",
+              "expected_behavior": "Calls dazzle_ask and answers in text that the test account visited Tokyo in March 2026, mentioning activities visible in the trip photos such as visiting temples and eating ramen. No photo gallery is shown."
+            },
+            {
+              "description": "Answer a question about the user's tastes from their photos",
+              "prompt": "What type of food do I enjoy?",
+              "tools_triggered": "dazzle_ask",
+              "expected_behavior": "Calls dazzle_ask and answers in text with the kinds of food that appear most in the test account's photos, such as Japanese food like sushi and ramen, and pizza. No photo gallery is shown."
+            }
+          ],
+          "negative": [
+            {
+              "description": "General knowledge question with nothing personal to look up",
+              "prompt": "What is the capital of France?"
+            },
+            {
+              "description": "Request for public images from the web, not the user's own library",
+              "prompt": "Find pictures of the Eiffel Tower on the web."
+            },
+            {
+              "description": "Unsupported destructive action on the user's photos",
+              "prompt": "Delete all my photos from last week."
+            }
+          ]
+        },
+        "demo_recording_url": "https://youtu.be/MjTKJLQyw-c",
+        "commerce": false,
+        "commerce_description": "Dazzle Photo Intelligence does not sell products or process payments."
+      },
+      "publication": {
+        "countries": ["BE", "CA", "CH", "DE", "ES", "FI", "FR", "GB", "IE", "IT", "NL", "PL", "SE", "US"],
+        "release_notes": "Initial release: ask questions about your life and see matching photos from your Dazzle library."
+      }
+    }
+  }
+}

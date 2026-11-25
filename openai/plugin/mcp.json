@@ -1,0 +1,22 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "dazzle": {
+      "type": "streamable-http",
+      "url": "https://api.dazzle.ai/apps/chatgpt",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "provided",
+              "clientId": "chatgpt",
+              "tokenEndpointAuthMethod": "none"
+            },
+            "baseScopes": ["query"]
+          }
+        }
+      }
+    }
+  }
+}
